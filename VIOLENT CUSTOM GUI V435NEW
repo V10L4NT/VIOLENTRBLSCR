@@ -1,5 +1,5 @@
-local VioLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/NEW/VIOLENT%20MAIN%20LIBRARY')))()
-local Window = VioLib:MakeWindow({Name = "TEST RUN I GUESS", HidePremium = true, SaveConfig = true, ConfigFolder = "VioTest"})
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/VIOLENT%20NEW%20UI%20LIBRARY')))()
+local Window = OrionLib:MakeWindow({Name = "VIOLENT SCRIPT HUB || V4.35 || @therealviolent0", HidePremium = false, SaveConfig = true, ConfigFolder = "ViolentTest"})
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
@@ -7,14 +7,14 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
 
-VioLib:MakeNotification({
+OrionLib:MakeNotification({
 	Name = "VIOLENT GUI OPENED",
 	Content = "Welcome "..Player.Name.." to, VIOLENT GUI!",
 	Image = "rbxassetid://71215999698365",
 	Time = 6
 })
 
-VioLib:MakeNotification({
+OrionLib:MakeNotification({
 	Name = "CURRENT VERSION UP-TO DATE",
 	Content = "Current version is V4.35",
 	Image = "rbxassetid://104887806886697",
@@ -52,10 +52,10 @@ function LaunchPremiumHubNotif()
 end
 
 function LaunchPremiumHub()
-	local Window = VioLib:MakeWindow({Name = "🟢 VIOLENT PREMIUM HUB - @therealviolent0", HidePremium = false, SaveConfig = true, ConfigFolder = "ViolentTest", IntroEnabled = true})
+	local Window = OrionLib:MakeWindow({Name = "🟢 VIOLENT PREMIUM HUB - @therealviolent0", HidePremium = false, SaveConfig = true, ConfigFolder = "ViolentTest", IntroEnabled = true})
 
 
-	VioLib:MakeNotification({
+	OrionLib:MakeNotification({
 		Name = "VPREMIUM HUB",
 		Content = "Welcome to the Restricted VIOLENT Premium Hub!",
 		Image = "rbxassetid://100885391358583",
@@ -133,5 +133,5 @@ function LaunchPremiumHub()
 		  end    
 	})
 
-VioLib:Init()
+OrionLib:Init()
 end
