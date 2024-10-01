@@ -1,3 +1,5 @@
+
+
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
@@ -5,7 +7,7 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
 
-local ViolentoLib = {
+local VioLib = {
 	Elements = {},
 	ThemeObjects = {},
 	Connections = {},
@@ -33,7 +35,7 @@ local Success, Response = pcall(function()
 end)
 
 if not Success then
-	warn("\nViolent Library - Failed to load Feather Icons. Error code: " .. Response .. "\n")
+	warn("\nOrion Library - Failed to load Feather Icons. Error code: " .. Response .. "\n")
 end	
 
 local function GetIcon(IconName)
@@ -44,53 +46,53 @@ local function GetIcon(IconName)
 	end
 end   
 
-local Violento = Instance.new("ScreenGui")
-Violento.Name = "Violento"
+local Orion = Instance.new("ScreenGui")
+Orion.Name = "Orion"
 if syn then
-	syn.protect_gui(Violento)
-	Violento.Parent = game.CoreGui
+	syn.protect_gui(Orion)
+	Orion.Parent = game.CoreGui
 else
-	Violento.Parent = gethui() or game.CoreGui
+	Orion.Parent = gethui() or game.CoreGui
 end
 
 if gethui then
 	for _, Interface in ipairs(gethui():GetChildren()) do
-		if Interface.Name == Violento.Name and Interface ~= Violento then
+		if Interface.Name == Orion.Name and Interface ~= Orion then
 			Interface:Destroy()
 		end
 	end
 else
 	for _, Interface in ipairs(game.CoreGui:GetChildren()) do
-		if Interface.Name == Violento.Name and Interface ~= Violento then
+		if Interface.Name == Orion.Name and Interface ~= Orion then
 			Interface:Destroy()
 		end
 	end
 end
 
-function ViolentoLib:IsRunning()
+function VioLib:IsRunning()
 	if gethui then
-		return Violento.Parent == gethui()
+		return Orion.Parent == gethui()
 	else
-		return Violento.Parent == game:GetService("CoreGui")
+		return Orion.Parent == game:GetService("CoreGui")
 	end
 
 end
 
 local function AddConnection(Signal, Function)
-	if (not ViolentoLib:IsRunning()) then
+	if (not VioLib:IsRunning()) then
 		return
 	end
 	local SignalConnect = Signal:Connect(Function)
-	table.insert(ViolentoLib.Connections, SignalConnect)
+	table.insert(VioLib.Connections, SignalConnect)
 	return SignalConnect
 end
 
 task.spawn(function()
-	while (ViolentoLib:IsRunning()) do
+	while (VioLib:IsRunning()) do
 		wait()
 	end
 
-	for _, Connection in next, ViolentoLib.Connections do
+	for _, Connection in next, VioLib.Connections do
 		Connection:Disconnect()
 	end
 end)
@@ -138,13 +140,13 @@ local function Create(Name, Properties, Children)
 end
 
 local function CreateElement(ElementName, ElementFunction)
-	ViolentoLib.Elements[ElementName] = function(...)
+	VioLib.Elements[ElementName] = function(...)
 		return ElementFunction(...)
 	end
 end
 
 local function MakeElement(ElementName, ...)
-	local NewElement = ViolentoLib.Elements[ElementName](...)
+	local NewElement = VioLib.Elements[ElementName](...)
 	return NewElement
 end
 
@@ -187,18 +189,18 @@ local function ReturnProperty(Object)
 end
 
 local function AddThemeObject(Object, Type)
-	if not ViolentoLib.ThemeObjects[Type] then
-		ViolentoLib.ThemeObjects[Type] = {}
+	if not VioLib.ThemeObjects[Type] then
+		VioLib.ThemeObjects[Type] = {}
 	end    
-	table.insert(ViolentoLib.ThemeObjects[Type], Object)
-	Object[ReturnProperty(Object)] = ViolentoLib.Themes[ViolentoLib.SelectedTheme][Type]
+	table.insert(VioLib.ThemeObjects[Type], Object)
+	Object[ReturnProperty(Object)] = VioLib.Themes[VioLib.SelectedTheme][Type]
 	return Object
 end    
 
 local function SetTheme()
-	for Name, Type in pairs(ViolentoLib.ThemeObjects) do
+	for Name, Type in pairs(VioLib.ThemeObjects) do
 		for _, Object in pairs(Type) do
-			Object[ReturnProperty(Object)] = ViolentoLib.Themes[ViolentoLib.SelectedTheme][Name]
+			Object[ReturnProperty(Object)] = VioLib.Themes[VioLib.SelectedTheme][Name]
 		end    
 	end    
 end
@@ -214,23 +216,23 @@ end
 local function LoadCfg(Config)
 	local Data = HttpService:JSONDecode(Config)
 	table.foreach(Data, function(a,b)
-		if ViolentoLib.Flags[a] then
+		if VioLib.Flags[a] then
 			spawn(function() 
-				if ViolentoLib.Flags[a].Type == "Colorpicker" then
-					ViolentoLib.Flags[a]:Set(UnpackColor(b))
+				if VioLib.Flags[a].Type == "Colorpicker" then
+					VioLib.Flags[a]:Set(UnpackColor(b))
 				else
-					ViolentoLib.Flags[a]:Set(b)
+					VioLib.Flags[a]:Set(b)
 				end    
 			end)
 		else
-			warn("Violent Library Config Loader - Could not find ", a ,b)
+			warn("Orion Library Config Loader - Could not find ", a ,b)
 		end
 	end)
 end
 
 local function SaveCfg(Name)
 	local Data = {}
-	for i,v in pairs(ViolentoLib.Flags) do
+	for i,v in pairs(VioLib.Flags) do
 		if v.Save then
 			if v.Type == "Colorpicker" then
 				Data[i] = PackColor(v.Value)
@@ -239,7 +241,7 @@ local function SaveCfg(Name)
 			end
 		end	
 	end
-	writefile(ViolentoLib.Folder .. "/" .. Name .. ".txt", tostring(HttpService:JSONEncode(Data)))
+	writefile(VioLib.Folder .. "/" .. Name .. ".txt", tostring(HttpService:JSONEncode(Data)))
 end
 
 local WhitelistedMouse = {Enum.UserInputType.MouseButton1, Enum.UserInputType.MouseButton2,Enum.UserInputType.MouseButton3}
@@ -383,14 +385,14 @@ local NotificationHolder = SetProps(SetChildren(MakeElement("TFrame"), {
 	Position = UDim2.new(1, -25, 1, -25),
 	Size = UDim2.new(0, 300, 1, -25),
 	AnchorPoint = Vector2.new(1, 1),
-	Parent = Violento
+	Parent = Orion
 })
 
-function ViolentoLib:MakeNotification(NotificationConfig)
+function VioLib:MakeNotification(NotificationConfig)
 	spawn(function()
 		NotificationConfig.Name = NotificationConfig.Name or "Notification"
 		NotificationConfig.Content = NotificationConfig.Content or "Test"
-		NotificationConfig.Image = NotificationConfig.Image or "rbxassetid://85145199370298"
+		NotificationConfig.Image = NotificationConfig.Image or "rbxassetid://4384403532"
 		NotificationConfig.Time = NotificationConfig.Time or 15
 
 		local NotificationParent = SetProps(MakeElement("TFrame"), {
@@ -447,12 +449,12 @@ function ViolentoLib:MakeNotification(NotificationConfig)
 	end)
 end    
 
-function ViolentoLib:Init()
-	if ViolentoLib.SaveCfg then	
+function VioLib:Init()
+	if VioLib.SaveCfg then	
 		pcall(function()
-			if isfile(ViolentoLib.Folder .. "/" .. game.GameId .. ".txt") then
-				LoadCfg(readfile(ViolentoLib.Folder .. "/" .. game.GameId .. ".txt"))
-				ViolentoLib:MakeNotification({
+			if isfile(VioLib.Folder .. "/" .. game.GameId .. ".txt") then
+				LoadCfg(readfile(VioLib.Folder .. "/" .. game.GameId .. ".txt"))
+				VioLib:MakeNotification({
 					Name = "Configuration",
 					Content = "Auto-loaded configuration for the game " .. game.GameId .. ".",
 					Time = 5
@@ -462,27 +464,27 @@ function ViolentoLib:Init()
 	end	
 end	
 
-function ViolentoLib:MakeWindow(WindowConfig)
+function VioLib:MakeWindow(WindowConfig)
 	local FirstTab = true
 	local Minimized = false
 	local Loaded = false
 	local UIHidden = false
 
 	WindowConfig = WindowConfig or {}
-	WindowConfig.Name = WindowConfig.Name or "Violento Library"
+	WindowConfig.Name = WindowConfig.Name or "Orion Library"
 	WindowConfig.ConfigFolder = WindowConfig.ConfigFolder or WindowConfig.Name
 	WindowConfig.SaveConfig = WindowConfig.SaveConfig or false
 	WindowConfig.HidePremium = WindowConfig.HidePremium or false
 	if WindowConfig.IntroEnabled == nil then
 		WindowConfig.IntroEnabled = true
 	end
-	WindowConfig.IntroText = WindowConfig.IntroText or "Violento Library"
+	WindowConfig.IntroText = WindowConfig.IntroText or "Orion Library"
 	WindowConfig.CloseCallback = WindowConfig.CloseCallback or function() end
 	WindowConfig.ShowIcon = WindowConfig.ShowIcon or false
 	WindowConfig.Icon = WindowConfig.Icon or "rbxassetid://8834748103"
-	WindowConfig.IntroIcon = WindowConfig.IntroIcon or "rbxassetid://102447013635067"
-	ViolentoLib.Folder = WindowConfig.ConfigFolder
-	ViolentoLib.SaveCfg = WindowConfig.SaveConfig
+	WindowConfig.IntroIcon = WindowConfig.IntroIcon or "rbxassetid://8834748103"
+	VioLib.Folder = WindowConfig.ConfigFolder
+	VioLib.SaveCfg = WindowConfig.SaveConfig
 
 	if WindowConfig.SaveConfig then
 		if not isfolder(WindowConfig.ConfigFolder) then
@@ -506,7 +508,7 @@ function ViolentoLib:MakeWindow(WindowConfig)
 		Position = UDim2.new(0.5, 0, 0, 0),
 		BackgroundTransparency = 1
 	}), {
-		AddThemeObject(SetProps(MakeElement("Image", "rbxassetid://119821752757341"), {
+		AddThemeObject(SetProps(MakeElement("Image", "rbxassetid://7072725342"), {
 			Position = UDim2.new(0, 9, 0, 6),
 			Size = UDim2.new(0, 18, 0, 18)
 		}), "Text")
@@ -516,7 +518,7 @@ function ViolentoLib:MakeWindow(WindowConfig)
 		Size = UDim2.new(0.5, 0, 1, 0),
 		BackgroundTransparency = 1
 	}), {
-		AddThemeObject(SetProps(MakeElement("Image", "rbxassetid://94009629883053"), {
+		AddThemeObject(SetProps(MakeElement("Image", "rbxassetid://7072719338"), {
 			Position = UDim2.new(0, 9, 0, 6),
 			Size = UDim2.new(0, 18, 0, 18),
 			Name = "Ico"
@@ -599,7 +601,7 @@ function ViolentoLib:MakeWindow(WindowConfig)
 	}), "Stroke")
 
 	local MainWindow = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 10), {
-		Parent = Violento,
+		Parent = Orion,
 		Position = UDim2.new(0.5, -307, 0.5, -172),
 		Size = UDim2.new(0, 615, 0, 344),
 		ClipsDescendants = true
@@ -648,7 +650,7 @@ function ViolentoLib:MakeWindow(WindowConfig)
 	AddConnection(CloseBtn.MouseButton1Up, function()
 		MainWindow.Visible = false
 		UIHidden = true
-		ViolentoLib:MakeNotification({
+		VioLib:MakeNotification({
 			Name = "Interface Hidden",
 			Content = "Tap RightShift to reopen the interface",
 			Time = 5
@@ -685,7 +687,7 @@ function ViolentoLib:MakeWindow(WindowConfig)
 	local function LoadSequence()
 		MainWindow.Visible = false
 		local LoadSequenceLogo = SetProps(MakeElement("Image", WindowConfig.IntroIcon), {
-			Parent = Violento,
+			Parent = Orion,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.new(0.5, 0, 0.4, 0),
 			Size = UDim2.new(0, 28, 0, 28),
@@ -694,7 +696,7 @@ function ViolentoLib:MakeWindow(WindowConfig)
 		})
 
 		local LoadSequenceText = SetProps(MakeElement("Label", WindowConfig.IntroText, 14), {
-			Parent = Violento,
+			Parent = Orion,
 			Size = UDim2.new(1, 0, 1, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.new(0.5, 19, 0.5, 0),
@@ -884,22 +886,22 @@ function ViolentoLib:MakeWindow(WindowConfig)
 				}), "Second")
 
 				AddConnection(Click.MouseEnter, function()
-					TweenService:Create(ButtonFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.R * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.G * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.B * 255 + 3)}):Play()
+					TweenService:Create(ButtonFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(VioLib.Themes[VioLib.SelectedTheme].Second.R * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.G * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.B * 255 + 3)}):Play()
 				end)
 
 				AddConnection(Click.MouseLeave, function()
-					TweenService:Create(ButtonFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second}):Play()
+					TweenService:Create(ButtonFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = VioLib.Themes[VioLib.SelectedTheme].Second}):Play()
 				end)
 
 				AddConnection(Click.MouseButton1Up, function()
-					TweenService:Create(ButtonFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.R * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.G * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.B * 255 + 3)}):Play()
+					TweenService:Create(ButtonFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(VioLib.Themes[VioLib.SelectedTheme].Second.R * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.G * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.B * 255 + 3)}):Play()
 					spawn(function()
 						ButtonConfig.Callback()
 					end)
 				end)
 
 				AddConnection(Click.MouseButton1Down, function()
-					TweenService:Create(ButtonFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.R * 255 + 6, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.G * 255 + 6, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.B * 255 + 6)}):Play()
+					TweenService:Create(ButtonFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(VioLib.Themes[VioLib.SelectedTheme].Second.R * 255 + 6, VioLib.Themes[VioLib.SelectedTheme].Second.G * 255 + 6, VioLib.Themes[VioLib.SelectedTheme].Second.B * 255 + 6)}):Play()
 				end)
 
 				function Button:Set(ButtonText)
@@ -959,8 +961,8 @@ function ViolentoLib:MakeWindow(WindowConfig)
 
 				function Toggle:Set(Value)
 					Toggle.Value = Value
-					TweenService:Create(ToggleBox, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Toggle.Value and ToggleConfig.Color or ViolentoLib.Themes.Default.Divider}):Play()
-					TweenService:Create(ToggleBox.Stroke, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = Toggle.Value and ToggleConfig.Color or ViolentoLib.Themes.Default.Stroke}):Play()
+					TweenService:Create(ToggleBox, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Toggle.Value and ToggleConfig.Color or VioLib.Themes.Default.Divider}):Play()
+					TweenService:Create(ToggleBox.Stroke, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = Toggle.Value and ToggleConfig.Color or VioLib.Themes.Default.Stroke}):Play()
 					TweenService:Create(ToggleBox.Ico, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {ImageTransparency = Toggle.Value and 0 or 1, Size = Toggle.Value and UDim2.new(0, 20, 0, 20) or UDim2.new(0, 8, 0, 8)}):Play()
 					ToggleConfig.Callback(Toggle.Value)
 				end    
@@ -968,25 +970,25 @@ function ViolentoLib:MakeWindow(WindowConfig)
 				Toggle:Set(Toggle.Value)
 
 				AddConnection(Click.MouseEnter, function()
-					TweenService:Create(ToggleFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.R * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.G * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.B * 255 + 3)}):Play()
+					TweenService:Create(ToggleFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(VioLib.Themes[VioLib.SelectedTheme].Second.R * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.G * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.B * 255 + 3)}):Play()
 				end)
 
 				AddConnection(Click.MouseLeave, function()
-					TweenService:Create(ToggleFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second}):Play()
+					TweenService:Create(ToggleFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = VioLib.Themes[VioLib.SelectedTheme].Second}):Play()
 				end)
 
 				AddConnection(Click.MouseButton1Up, function()
-					TweenService:Create(ToggleFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.R * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.G * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.B * 255 + 3)}):Play()
+					TweenService:Create(ToggleFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(VioLib.Themes[VioLib.SelectedTheme].Second.R * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.G * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.B * 255 + 3)}):Play()
 					SaveCfg(game.GameId)
 					Toggle:Set(not Toggle.Value)
 				end)
 
 				AddConnection(Click.MouseButton1Down, function()
-					TweenService:Create(ToggleFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.R * 255 + 6, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.G * 255 + 6, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.B * 255 + 6)}):Play()
+					TweenService:Create(ToggleFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(VioLib.Themes[VioLib.SelectedTheme].Second.R * 255 + 6, VioLib.Themes[VioLib.SelectedTheme].Second.G * 255 + 6, VioLib.Themes[VioLib.SelectedTheme].Second.B * 255 + 6)}):Play()
 				end)
 
 				if ToggleConfig.Flag then
-					ViolentoLib.Flags[ToggleConfig.Flag] = Toggle
+					VioLib.Flags[ToggleConfig.Flag] = Toggle
 				end	
 				return Toggle
 			end  
@@ -1081,7 +1083,7 @@ function ViolentoLib:MakeWindow(WindowConfig)
 
 				Slider:Set(Slider.Value)
 				if SliderConfig.Flag then				
-					ViolentoLib.Flags[SliderConfig.Flag] = Slider
+					VioLib.Flags[SliderConfig.Flag] = Slider
 				end
 				return Slider
 			end  
@@ -1236,7 +1238,7 @@ function ViolentoLib:MakeWindow(WindowConfig)
 				Dropdown:Refresh(Dropdown.Options, false)
 				Dropdown:Set(Dropdown.Value)
 				if DropdownConfig.Flag then				
-					ViolentoLib.Flags[DropdownConfig.Flag] = Dropdown
+					VioLib.Flags[DropdownConfig.Flag] = Dropdown
 				end
 				return Dropdown
 			end
@@ -1334,19 +1336,19 @@ function ViolentoLib:MakeWindow(WindowConfig)
 				end)
 
 				AddConnection(Click.MouseEnter, function()
-					TweenService:Create(BindFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.R * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.G * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.B * 255 + 3)}):Play()
+					TweenService:Create(BindFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(VioLib.Themes[VioLib.SelectedTheme].Second.R * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.G * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.B * 255 + 3)}):Play()
 				end)
 
 				AddConnection(Click.MouseLeave, function()
-					TweenService:Create(BindFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second}):Play()
+					TweenService:Create(BindFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = VioLib.Themes[VioLib.SelectedTheme].Second}):Play()
 				end)
 
 				AddConnection(Click.MouseButton1Up, function()
-					TweenService:Create(BindFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.R * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.G * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.B * 255 + 3)}):Play()
+					TweenService:Create(BindFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(VioLib.Themes[VioLib.SelectedTheme].Second.R * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.G * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.B * 255 + 3)}):Play()
 				end)
 
 				AddConnection(Click.MouseButton1Down, function()
-					TweenService:Create(BindFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.R * 255 + 6, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.G * 255 + 6, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.B * 255 + 6)}):Play()
+					TweenService:Create(BindFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(VioLib.Themes[VioLib.SelectedTheme].Second.R * 255 + 6, VioLib.Themes[VioLib.SelectedTheme].Second.G * 255 + 6, VioLib.Themes[VioLib.SelectedTheme].Second.B * 255 + 6)}):Play()
 				end)
 
 				function Bind:Set(Key)
@@ -1358,7 +1360,7 @@ function ViolentoLib:MakeWindow(WindowConfig)
 
 				Bind:Set(BindConfig.Default)
 				if BindConfig.Flag then				
-					ViolentoLib.Flags[BindConfig.Flag] = Bind
+					VioLib.Flags[BindConfig.Flag] = Bind
 				end
 				return Bind
 			end  
@@ -1425,20 +1427,20 @@ function ViolentoLib:MakeWindow(WindowConfig)
 				TextboxActual.Text = TextboxConfig.Default
 
 				AddConnection(Click.MouseEnter, function()
-					TweenService:Create(TextboxFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.R * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.G * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.B * 255 + 3)}):Play()
+					TweenService:Create(TextboxFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(VioLib.Themes[VioLib.SelectedTheme].Second.R * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.G * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.B * 255 + 3)}):Play()
 				end)
 
 				AddConnection(Click.MouseLeave, function()
-					TweenService:Create(TextboxFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second}):Play()
+					TweenService:Create(TextboxFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = VioLib.Themes[VioLib.SelectedTheme].Second}):Play()
 				end)
 
 				AddConnection(Click.MouseButton1Up, function()
-					TweenService:Create(TextboxFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.R * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.G * 255 + 3, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.B * 255 + 3)}):Play()
+					TweenService:Create(TextboxFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(VioLib.Themes[VioLib.SelectedTheme].Second.R * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.G * 255 + 3, VioLib.Themes[VioLib.SelectedTheme].Second.B * 255 + 3)}):Play()
 					TextboxActual:CaptureFocus()
 				end)
 
 				AddConnection(Click.MouseButton1Down, function()
-					TweenService:Create(TextboxFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.R * 255 + 6, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.G * 255 + 6, ViolentoLib.Themes[ViolentoLib.SelectedTheme].Second.B * 255 + 6)}):Play()
+					TweenService:Create(TextboxFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(VioLib.Themes[VioLib.SelectedTheme].Second.R * 255 + 6, VioLib.Themes[VioLib.SelectedTheme].Second.G * 255 + 6, VioLib.Themes[VioLib.SelectedTheme].Second.B * 255 + 6)}):Play()
 				end)
 			end 
 			function ElementFunction:AddColorpicker(ColorpickerConfig)
@@ -1622,7 +1624,7 @@ function ViolentoLib:MakeWindow(WindowConfig)
 
 				Colorpicker:Set(Colorpicker.Value)
 				if ColorpickerConfig.Flag then				
-					ViolentoLib.Flags[ColorpickerConfig.Flag] = Colorpicker
+					VioLib.Flags[ColorpickerConfig.Flag] = Colorpicker
 				end
 				return Colorpicker
 			end  
@@ -1727,7 +1729,7 @@ function ViolentoLib:MakeWindow(WindowConfig)
 	--				})
 	--			})
 	--		end
-	--		ViolentoLib:MakeNotification({
+	--		VioLib:MakeNotification({
 	--			Name = "UI Library Available",
 	--			Content = "New UI Library Available - Joining Discord (#announcements)",
 	--			Time = 8
@@ -1757,8 +1759,8 @@ function ViolentoLib:MakeWindow(WindowConfig)
 	return TabFunction
 end   
 
-function ViolentoLib:Destroy()
-	Violento:Destroy()
+function VioLib:Destroy()
+	Orion:Destroy()
 end
 
-return ViolentoLib
+return VioLib
