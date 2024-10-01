@@ -1,4 +1,4 @@
-local VioLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/NEW/VIOLENT%20MAIN%20LIBRARY?token=GHSAT0AAAAAACWKOAFU6GBALZKYOQUS3TVKZX4B2GA')))()
+local VioLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/NEW/VIOLENT%20MAIN%20LIBRARY')))()
 local Window = VioLib:MakeWindow({Name = "TEST RUN I GUESS", HidePremium = true, SaveConfig = true, ConfigFolder = "VioTest"})
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
