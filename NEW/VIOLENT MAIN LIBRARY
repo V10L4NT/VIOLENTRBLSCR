@@ -1,4 +1,4 @@
-
+--therealviolent0
 
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -35,7 +35,7 @@ local Success, Response = pcall(function()
 end)
 
 if not Success then
-	warn("\nVio Library - Failed to load Feather Icons. Error code: " .. Response .. "\n")
+	warn("\nVioLib Library - Failed to load Feather Icons. Error code: " .. Response .. "\n")
 end	
 
 local function GetIcon(IconName)
@@ -46,24 +46,24 @@ local function GetIcon(IconName)
 	end
 end   
 
-local Vio = Instance.new("ScreenGui")
-Vio.Name = "Vio"
+local VioLib = Instance.new("ScreenGui")
+VioLib.Name = "VioLib"
 if syn then
-	syn.protect_gui(Vio)
-	Vio.Parent = game.CoreGui
+	syn.protect_gui(VioLib)
+	VioLib.Parent = game.CoreGui
 else
-	Vio.Parent = gethui() or game.CoreGui
+	VioLib.Parent = gethui() or game.CoreGui
 end
 
 if gethui then
 	for _, Interface in ipairs(gethui():GetChildren()) do
-		if Interface.Name == Vio.Name and Interface ~= Vio then
+		if Interface.Name == VioLib.Name and Interface ~= VioLib then
 			Interface:Destroy()
 		end
 	end
 else
 	for _, Interface in ipairs(game.CoreGui:GetChildren()) do
-		if Interface.Name == Vio.Name and Interface ~= Vio then
+		if Interface.Name == VioLib.Name and Interface ~= VioLib then
 			Interface:Destroy()
 		end
 	end
@@ -71,9 +71,9 @@ end
 
 function VioLib:IsRunning()
 	if gethui then
-		return Vio.Parent == gethui()
+		return VioLib.Parent == gethui()
 	else
-		return Vio.Parent == game:GetService("CoreGui")
+		return VioLib.Parent == game:GetService("CoreGui")
 	end
 
 end
@@ -225,7 +225,7 @@ local function LoadCfg(Config)
 				end    
 			end)
 		else
-			warn("Vio Library Config Loader - Could not find ", a ,b)
+			warn("VioLib Library Config Loader - Could not find ", a ,b)
 		end
 	end)
 end
@@ -385,7 +385,7 @@ local NotificationHolder = SetProps(SetChildren(MakeElement("TFrame"), {
 	Position = UDim2.new(1, -25, 1, -25),
 	Size = UDim2.new(0, 300, 1, -25),
 	AnchorPoint = Vector2.new(1, 1),
-	Parent = Vio
+	Parent = VioLib
 })
 
 function VioLib:MakeNotification(NotificationConfig)
@@ -471,14 +471,14 @@ function VioLib:MakeWindow(WindowConfig)
 	local UIHidden = false
 
 	WindowConfig = WindowConfig or {}
-	WindowConfig.Name = WindowConfig.Name or "Vio Library"
+	WindowConfig.Name = WindowConfig.Name or "VioLib Library"
 	WindowConfig.ConfigFolder = WindowConfig.ConfigFolder or WindowConfig.Name
 	WindowConfig.SaveConfig = WindowConfig.SaveConfig or false
 	WindowConfig.HidePremium = WindowConfig.HidePremium or false
 	if WindowConfig.IntroEnabled == nil then
 		WindowConfig.IntroEnabled = true
 	end
-	WindowConfig.IntroText = WindowConfig.IntroText or "Vio Library"
+	WindowConfig.IntroText = WindowConfig.IntroText or "VioLib Library"
 	WindowConfig.CloseCallback = WindowConfig.CloseCallback or function() end
 	WindowConfig.ShowIcon = WindowConfig.ShowIcon or false
 	WindowConfig.Icon = WindowConfig.Icon or "rbxassetid://8834748103"
@@ -601,7 +601,7 @@ function VioLib:MakeWindow(WindowConfig)
 	}), "Stroke")
 
 	local MainWindow = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 10), {
-		Parent = Vio,
+		Parent = VioLib,
 		Position = UDim2.new(0.5, -307, 0.5, -172),
 		Size = UDim2.new(0, 615, 0, 344),
 		ClipsDescendants = true
@@ -687,7 +687,7 @@ function VioLib:MakeWindow(WindowConfig)
 	local function LoadSequence()
 		MainWindow.Visible = false
 		local LoadSequenceLogo = SetProps(MakeElement("Image", WindowConfig.IntroIcon), {
-			Parent = Vio,
+			Parent = VioLib,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.new(0.5, 0, 0.4, 0),
 			Size = UDim2.new(0, 28, 0, 28),
@@ -696,7 +696,7 @@ function VioLib:MakeWindow(WindowConfig)
 		})
 
 		local LoadSequenceText = SetProps(MakeElement("Label", WindowConfig.IntroText, 14), {
-			Parent = Vio,
+			Parent = VioLib,
 			Size = UDim2.new(1, 0, 1, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.new(0.5, 19, 0.5, 0),
@@ -1760,7 +1760,7 @@ function VioLib:MakeWindow(WindowConfig)
 end   
 
 function VioLib:Destroy()
-	Vio:Destroy()
+	VioLib:Destroy()
 end
 
 return VioLib
