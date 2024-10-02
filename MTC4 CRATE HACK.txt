@@ -1,0 +1,31 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+_G.Target = nil
+_G.nigger = false
+
+for _, Child in pairs(workspace.Map.ToolGivers:GetChildren()) do
+    if Child.Name == "AmmoPallet" and Child:FindFirstChild("ClickDetector") then
+        _G.Target = Child.Model.AmmoCrate
+        fireclickdetector(Child.ClickDetector)
+        _G.Target = nil
+    end
+end
+
+if not _G.nigger then
+    _G.nigger = true
+
+    OldIndex = hookmetamethod(game, "__index", function(Self, Key)
+        if checkcaller() then return OldIndex(Self, Key) end
+
+        if Target ~= nil then
+            if Key == "CFrame" then
+                return Target.CFrame
+            elseif Key == "Position" then
+                return Target.Position
+            end
+        end
+
+        return OldIndex(Self, Key)
+    end)
+end
