@@ -7,20 +7,6 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
 
-OrionLib:MakeNotification({
-	Name = "VIOLENT GUI OPENED",
-	Content = "Welcome "..Player.Name.." to, VIOLENT GUI!",
-	Image = "rbxassetid://71215999698365",
-	Time = 6
-})
-
-OrionLib:MakeNotification({
-	Name = "CURRENT VERSION UP-TO DATE",
-	Content = "Current version is V4.35",
-	Image = "rbxassetid://104887806886697",
-	Time = 6
-})
-
 _G.Key = "VIOPPT"
 _G.KeyInput = "string"
 
