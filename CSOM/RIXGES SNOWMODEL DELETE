@@ -1,0 +1,15 @@
+local workspace = game:GetService("Workspace")
+
+local moduleName = "SnowModel"
+
+while true do
+    local module = workspace:FindFirstChild(moduleName)
+
+    if module then
+        print(moduleName .. " found. Deleting...")
+
+        module:Destroy()
+    end
+
+    wait(1)
+end
