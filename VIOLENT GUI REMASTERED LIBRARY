@@ -3,6 +3,7 @@
 ViolentHub Interface GUI.
 By @therealviolent.
 Supported by Most of the Exploits on Roblox.
+V4.85R
 
 shlex | Designing + Programming
 iRay  | Programming
@@ -14,9 +15,9 @@ VIOLENT | Remake of GUI
 
 local Release = "Beta 8"
 local NotificationDuration = 6.5
-local ViolentFolder = "Violent"
+local ViolentFolder = "ViolentRemastered"
 local ConfigurationFolder = ViolentFolder.."/Configurations"
-local ConfigurationExtension = ".vio"
+local ConfigurationExtension = ".violent"
 
 
 
@@ -27,17 +28,17 @@ local ViolentRemLibrary = {
 			TextFont = "Gotham", -- Default will use the various font faces used across Violent
 			TextColor = Color3.fromRGB(140, 0, 255),
 
-			Background = Color3.fromRGB(20, 20, 20),
-			Topbar = Color3.fromRGB(15, 15, 15),
-			Shadow = Color3.fromRGB(35, 35, 35),
+			Background = Color3.fromRGB(0, 0, 0),
+			Topbar = Color3.fromRGB(6, 6, 6),
+			Shadow = Color3.fromRGB(15, 15, 15),
 
 			NotificationBackground = Color3.fromRGB(20, 20, 20),
 			NotificationActionsBackground = Color3.fromRGB(230, 230, 230),
 
-			TabBackground = Color3.fromRGB(80, 80, 80),
-			TabStroke = Color3.fromRGB(85, 85, 85),
-			TabBackgroundSelected = Color3.fromRGB(210, 210, 210),
-			TabTextColor = Color3.fromRGB(240, 240, 240),
+			TabBackground = Color3.fromRGB(45, 45, 45),
+			TabStroke = Color3.fromRGB(140, 0, 255),
+			TabBackgroundSelected = Color3.fromRGB(75, 75, 75),
+			TabTextColor = Color3.fromRGB(140, 0, 255),
 			SelectedTabTextColor = Color3.fromRGB(50, 50, 50),
 
 			ElementBackground = Color3.fromRGB(35, 35, 35),
