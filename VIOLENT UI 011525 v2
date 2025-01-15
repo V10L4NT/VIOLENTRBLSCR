@@ -470,7 +470,7 @@ local RayfieldLibrary = {
 		},
 
 		DarkBlue = {
-			TextColor = Color3.fromRGB(3, 107, 252),
+			TextColor = Color3.fromRGB(0, 236, 252),
 
 			Background = Color3.fromRGB(20, 25, 30),
 			Topbar = Color3.fromRGB(30, 35, 40),
