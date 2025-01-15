@@ -1,0 +1,202 @@
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/VIOLENT%20UI%20011525'))()
+local Window = Rayfield:CreateWindow({
+	Name = "VIOLENT GUI REMASTERED | V5 | 🟢",
+	Icon = 74273141956747,
+	LoadingTitle = "LOADING VIOLENT'S REMASTERED GUI....",
+	LoadingSubtitle = "by @therealviolent0",
+	Theme = "DarkBlue",
+ 
+	DisableRayfieldPrompts = false,
+	DisableBuildWarnings = false, 
+ 
+	ConfigurationSaving = {
+	   Enabled = true,
+	   FolderName = nil,
+	   FileName = "VIOLENT GUI V5"
+	},
+ 
+	Discord = {
+	   Enabled = true, 
+	   Invite = "hJJUJwk8j4", 
+	   RememberJoins = true 
+	},
+ 
+	KeySystem = true,
+	KeySettings = {
+	   Title = "VIOLENT GUI REMASTERED V5",
+	   Subtitle = "V5 KEY SYSTEM",
+	   Note = "UNLUCKY IF YOU HAVENT GOT ANY KEY! <3 #VIOLENT",
+	   FileName = "V5KEY",
+	   SaveKey = true,
+	   GrabKeyFromSite = false,
+	   Key = {"6FJ2AL9T3X-WQ7MV4Y8KDN5PZC"}
+	}
+ })
+
+ Rayfield:Notify({
+	Title = "VIOLENT GUI V5",
+	Content = "Made by @therealviolent0.",
+	Duration = 6,
+	Image = "binary",
+ })
+
+ Rayfield:Notify({
+	Title = "VIOLENT GUI V5",
+	Content = "Do not reupload, re-use any scripts, do not share the .exe file with anyone.",
+	Duration = 11,
+	Image = "ban",
+ })
+
+
+ local Tab = Window:CreateTab("Home", "home")
+ local Section = Tab:CreateSection("Informations")
+
+ local Label = Tab:CreateLabel("Welcome to the VIOLENT V5 UI.", "atom", Color3.fromRGB(80, 80, 80), false)
+
+
+ local Tab = Window:CreateTab("Common Scripts", "antenna")
+ local Section = Tab:CreateSection("General Scripts")
+
+
+ local Button = Tab:CreateButton({
+	Name = "Infinite Yield",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/UNIVERSAL/INFINITE%20YIELD%20V6'))()
+	end,
+ })
+
+local Button = Tab:CreateButton({
+	Name = "DarkDex V4",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/DarkDex%20V4'))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "V ChatSpy",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/UNIVERSAL/VIOLENT%20CHAT%20SPY'))()
+	end,
+})
+
+local Section = Tab:CreateSection("GUI Scripts")
+
+local Button = Tab:CreateButton({
+	Name = "Car-Velocity Changer",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/CSOM/VIOLENT%20CAR%20VELOCITY%20CHANGER'))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Proxima-Hub",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/PROXIMAHUB'))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "RAPER.exe",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/UNIVERSAL/RAPER.EXE'))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "FlingGUI",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/UNIVERSAL/FLING%20GUI'))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Animations",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/UNIVERSAL/VIOLENT%20ANIMATION%20GUI'))()
+	end,
+})
+
+local Section = Tab:CreateSection("Other Scripts")
+
+local Button = Tab:CreateButton({
+	Name = "Multi-Tools",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/UNIVERSAL/MULTITOOLS%20GUI'))()
+	end,
+})
+
+
+local Tab = Window:CreateTab("Game Scripts", "app-window")
+local Section = Tab:CreateSection("Clear Skies Over Milwaukee")
+
+local Button = Tab:CreateButton({
+	Name = "CassettePlayer UI Remover",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/CSOM/REMOVE%20CASSETTEPLAYERGUI'))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Falling Snow Remover",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/CSOM/RIXGES%20SNOWMODEL%20DELETE'))()
+	end,
+})
+
+
+local Button = Tab:CreateButton({
+	Name = "Outfit Logger",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/CSOM/OUTFIT%20LOGGER%20KEY'))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "VIOGUI V285",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/CSOM/VIOLENT%20V285'))()
+	end,
+})
+
+
+local Section = Tab:CreateSection("Multicrew Tank Combat")
+local Label = Tab:CreateLabel("That's coming a bit later pal.", "combine", Color3.fromRGB(100, 0, 0), false)
+
+
+local Section = Tab:CreateSection("Shrimp Game")
+
+local Button = Tab:CreateButton({
+	Name = "1:16AM GUI",
+	Callback = function()
+	loadstring(game:HttpGet('https://api.luarmor.net/files/v3/loaders/551d08851e0d6e76e7c2052f41fe2484.lua'))()
+	end,
+})
+
+local Label = Tab:CreateLabel("Key is, 'glassbridgeespismysavior'", "key", Color3.fromRGB(0, 100, 0), false)
+
+
+local Section = Tab:CreateSection("Isle 10")
+
+
+local Button = Tab:CreateButton({
+	Name = "Krypton Old",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/ISLE/Krypton%20Old'))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Krypton New 2024",
+	Callback = function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/V10L4NT/VIOLENTRBLSCR/refs/heads/yessir/ISLE/Krypton%20New'))()
+	end,
+})
+
+local Button = Tab:CreateButton({
+	Name = "Krypton V2 2025 (WIP)",
+	Callback = function()
+	loadstring(game:HttpGet(''))()
+	end,
+})
+
+local Label = Tab:CreateLabel("The Krypton V2 will come soon. I think....", "contact", Color3.fromRGB(100, 0, 0), false)
