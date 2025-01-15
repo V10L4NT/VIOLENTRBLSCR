@@ -29,7 +29,7 @@ local Window = Rayfield:CreateWindow({
 	   FileName = "V5KEY",
 	   SaveKey = true,
 	   GrabKeyFromSite = false,
-	   Key = {"6FJ2AL9T3X-WQ7MV4Y8KDN5PZC"}
+	   Key = {"6FJ2AL9T3XWQ7MV4Y8KDN5PZC"}
 	}
  })
 
