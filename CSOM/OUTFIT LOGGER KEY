@@ -1,0 +1,293 @@
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local MarketplaceService = game:GetService("MarketplaceService")
+local HttpService = game:GetService("HttpService")
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local allowedPlayers = {
+    7306658453, --TERMINATIONLETTER
+    5350689875, --MISSILELOCK
+    7203317649, --BASEDZOVER
+    7112550531, --VIOTESTACC
+    7112541394, --VIOTESTACC2
+    7306610243, --VIOTERMINATION
+    7117100119, --VIOSTRIKER4
+    2609645467, --ZWAS
+    2265486566, --BOSNJAK_MAIN
+    7329056649, --BOSNJAK_ALT_CHEAT
+    7246322326, --WALRUSWARRIOR
+    5426288417, --ACTIONANTIFAG
+    7427326402 --FORGOTTENPERSON
+}
+
+local function isPlayerAllowed(player)
+    for _, id in pairs(allowedPlayers) do
+        if player.UserId == id then
+            return true
+        end
+    end
+    return false
+end
+
+local function roundify(instance, radius)
+    local uiCorner = Instance.new("UICorner")
+    uiCorner.CornerRadius = UDim.new(radius, 0)
+    uiCorner.Parent = instance
+end
+
+local function copyToClipboard(text)
+    setclipboard(text)
+end
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0.22, 0, 0.6, 0)
+mainFrame.Position = UDim2.new(0.3, 0, 0.2, 0)
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Parent = screenGui
+roundify(mainFrame, 0.040)
+
+if not isPlayerAllowed(game.Players.LocalPlayer) then
+    print("you're a noob, u can't use this GUI | violent <3")
+    screenGui:Destroy()
+    return
+end
+
+local validKey = "C595WEXQ2223DCSG257BSD43YSA423135F8F8C4F9ACS54FA6CF7CFD4S9G48GF51F5CD1"
+
+local keyFrame = Instance.new("Frame")
+keyFrame.Size = UDim2.new(0.3, 0, 0.2, 0)
+keyFrame.Position = UDim2.new(0.35, 0, 0.4, 0)
+keyFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+keyFrame.Parent = screenGui
+roundify(keyFrame, 0.1)
+
+local keyBox = Instance.new("TextBox")
+keyBox.Size = UDim2.new(0.7, 0, 0.3, 0)
+keyBox.Position = UDim2.new(0.15, 0, 0.25, 0)
+keyBox.PlaceholderText = "Waiting for a Serial, faggot."
+keyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+keyBox.Parent = keyFrame
+roundify(keyBox, 0.1)
+
+local keySubmit = Instance.new("TextButton")
+keySubmit.Size = UDim2.new(0.5, 0, 0.2, 0)
+keySubmit.Position = UDim2.new(0.25, 0, 0.65, 0)
+keySubmit.Text = "SUBMIT SERIAL"
+keySubmit.BackgroundColor3 = Color3.fromRGB(60, 255, 60)
+keySubmit.Parent = keyFrame
+roundify(keySubmit, 0.25)
+
+mainFrame.Visible = false
+
+local introFrame = Instance.new("Frame")
+introFrame.Size = UDim2.new(0.35, 0, 0.25, 0)
+introFrame.Position = UDim2.new(0.325, 0, 0.35, 0)
+introFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+introFrame.Visible = false
+introFrame.Parent = screenGui
+roundify(introFrame, 0.1)
+
+local introLabel = Instance.new("TextLabel")
+introLabel.Size = UDim2.new(0.9, 0, 0.5, 0)
+introLabel.Position = UDim2.new(0.05, 0, 0.10, 0)
+introLabel.Text = "made by @therealviolent0"
+introLabel.TextScaled = true
+introLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+introLabel.Font = Enum.Font.GothamBold
+introLabel.BackgroundTransparency = 1
+introLabel.Parent = introFrame
+
+local continueButton = Instance.new("TextButton")
+continueButton.Size = UDim2.new(0.5, 0, 0.25, 0)
+continueButton.Position = UDim2.new(0.25, 0, 1.25, 0)
+continueButton.Text = "Initialize ThugShaker CSOM Logger GUI"
+continueButton.BackgroundColor3 = Color3.fromRGB(80, 170, 255)
+continueButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+continueButton.Parent = introLabel
+roundify(continueButton, 0.2)
+
+keySubmit.MouseButton1Click:Connect(function()
+    if keyBox.Text == validKey then
+        keyFrame:Destroy()
+        introFrame.Visible = true
+    else
+        keyBox.Text = ""
+        keyBox.PlaceholderText = "Invalid serial key, faggot."
+        keyBox.PlaceholderColor3 = Color3.fromRGB(255, 0, 0)
+        wait(1)
+        keyBox.PlaceholderText = "Try again, faggot."
+        keyBox.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+    end
+end)
+
+continueButton.MouseButton1Click:Connect(function()
+    introFrame:Destroy()
+    mainFrame.Visible = true
+end)
+
+local searchBar = Instance.new("TextBox")
+searchBar.Size = UDim2.new(0.9, 0, 0.1, 0)
+searchBar.Position = UDim2.new(0.05, 0, 0.02, 0)
+searchBar.PlaceholderText = "Search for Niggers here."
+searchBar.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+searchBar.TextColor3 = Color3.fromRGB(255, 255, 255)
+searchBar.Parent = mainFrame
+roundify(searchBar, 0.1)
+
+local leaderboardFrame = Instance.new("ScrollingFrame")
+leaderboardFrame.Size = UDim2.new(0.9, 0, 0.75, 0)
+leaderboardFrame.Position = UDim2.new(0.05, 0, 0.15, 0)
+leaderboardFrame.CanvasSize = UDim2.new(0, 0, 5, 0)
+leaderboardFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+leaderboardFrame.ScrollBarThickness = 10
+leaderboardFrame.Parent = mainFrame
+roundify(leaderboardFrame, 0.1)
+
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0.22, 0, 0.05, 0)
+closeButton.Position = UDim2.new(0.45, 0, 0.93, 0)
+closeButton.Text = "CLOSE"
+closeButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+closeButton.Parent = mainFrame
+roundify(closeButton, 0.8)
+
+local detailFrame = Instance.new("Frame")
+detailFrame.Size = UDim2.new(0.4, 0, 0.4, 0)
+detailFrame.Position = UDim2.new(0.3, 0, 0.3, 0)
+detailFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+detailFrame.Visible = false
+detailFrame.Active = true
+detailFrame.Draggable = true
+detailFrame.Parent = screenGui
+roundify(detailFrame, 0.1)
+
+local detailCloseButton = closeButton:Clone()
+detailCloseButton.Parent = detailFrame
+detailCloseButton.Position = UDim2.new(0.35, 0, 0.020, 0)
+
+local copyAllButton = Instance.new("TextButton")
+copyAllButton.Size = UDim2.new(0.3, 0, 0.1, 0)
+copyAllButton.Position = UDim2.new(0.35, 0, 0.85, 0)
+copyAllButton.Text = "COPY TO CLIPBOARD"
+copyAllButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+copyAllButton.Parent = detailFrame
+roundify(copyAllButton, 0.5)
+
+local detailTextLabel = Instance.new("TextLabel")
+detailTextLabel.Size = UDim2.new(0.9, 0, 0.7, 0)
+detailTextLabel.Position = UDim2.new(0.05, 0, 0.1, 0)
+detailTextLabel.TextWrapped = true
+detailTextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+detailTextLabel.BackgroundTransparency = 1
+detailTextLabel.Parent = detailFrame
+
+closeButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+detailCloseButton.MouseButton1Click:Connect(function()
+    detailFrame.Visible = false
+end)
+
+local function getPlayerAssets(player)
+    local character = player.Character or player.CharacterAdded:Wait()
+    local assets = {}
+
+    for _, item in pairs(character:GetChildren()) do
+        if item:IsA("Shirt") then
+            table.insert(assets, "Shirt: " .. item.ShirtTemplate)
+        elseif item:IsA("Pants") then
+            table.insert(assets, "Pants: " .. item.PantsTemplate)
+        elseif item:IsA("Accessory") then
+            local handle = item:FindFirstChild("Handle")
+            if handle and handle:FindFirstChildOfClass("SpecialMesh") then
+                local mesh = handle:FindFirstChildOfClass("SpecialMesh")
+                table.insert(assets, item.Name .. ": " .. (mesh.TextureId or "No texture"))
+            end
+        elseif item:IsA("CharacterMesh") then
+            table.insert(assets, "Face: " .. item.MeshId)
+        end
+    end
+    return table.concat(assets, "\n")
+end
+
+copyAllButton.MouseButton1Click:Connect(function()
+    copyToClipboard(detailTextLabel.Text)
+end)
+
+local function updateLeaderboard(filter)
+    leaderboardFrame:ClearAllChildren()
+    local buttonHeight = 0.03 
+    local spacing = 0.01   
+    local yOffset = 0  
+
+    for _, player in pairs(Players:GetPlayers()) do
+        if not filter or filter == "" or 
+           string.find(string.lower(player.DisplayName), string.lower(filter)) or 
+           string.find(string.lower(player.Name), string.lower(filter)) then
+            
+            local playerButton = Instance.new("TextButton")
+            playerButton.Size = UDim2.new(0.95, 0, buttonHeight, 0)
+            playerButton.Position = UDim2.new(0.025, 0, yOffset, 0)
+            playerButton.Text = player.DisplayName .. " (@" .. player.Name .. ")"
+            playerButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+            playerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            playerButton.Parent = leaderboardFrame
+            roundify(playerButton, 0.1)
+
+            playerButton.MouseButton1Click:Connect(function()
+                detailFrame.Visible = true
+                detailTextLabel.Text = getPlayerAssets(player)
+            end)
+
+            yOffset = yOffset + buttonHeight + spacing
+        end
+    end
+
+    leaderboardFrame.CanvasSize = UDim2.new(0, 0, yOffset, 0)
+end
+
+updateLeaderboard()
+
+searchBar:GetPropertyChangedSignal("Text"):Connect(function()
+    updateLeaderboard(searchBar.Text)
+end)
+
+local refreshButton = Instance.new("TextButton")
+refreshButton.Size = UDim2.new(0.22, 0, 0.05, 0)
+refreshButton.Position = UDim2.new(0.70, 0, 0.93, 0)
+refreshButton.Text = "REFRESH"
+refreshButton.BackgroundColor3 = Color3.fromRGB(0, 120, 255)
+refreshButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+refreshButton.Parent = mainFrame
+roundify(refreshButton, 0.5)
+
+local playerCountLabel = Instance.new("TextLabel")
+playerCountLabel.Size = UDim2.new(0.3, 0, 0.05, 0)
+playerCountLabel.Position = UDim2.new(0.10, 0, 0.93, 0)
+playerCountLabel.BackgroundTransparency = 1
+playerCountLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+playerCountLabel.TextScaled = true
+playerCountLabel.Text = "Current Niggers Online: 0"
+playerCountLabel.Parent = mainFrame
+playerCountLabel.Font = Enum.Font.GothamSemibold
+
+local function updatePlayerCount()
+    playerCountLabel.Text = "Current Niggers Online: " .. #Players:GetPlayers()
+end
+
+refreshButton.MouseButton1Click:Connect(function()
+    updateLeaderboard()
+    updatePlayerCount()
+end)
+
+Players.PlayerAdded:Connect(updatePlayerCount)
+Players.PlayerRemoving:Connect(updatePlayerCount)
+
+updateLeaderboard()
+updatePlayerCount()
