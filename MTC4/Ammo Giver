@@ -9,7 +9,7 @@ for _, Child in pairs(workspace.Map.ToolGivers:GetChildren()) do
         if Child.Name == "AmmoPallet" then
             fireclickdetector(Child.ClickDetector)
             _G.Target = nil
-        elseif Child.Name == "Fuel" then
+        elseif Child.Name == "AmmoPallet" then
             _G.Target = Child.Model:FindFirstChild("Old fuel tank trailer")
             if _G.Target then
                 fireclickdetector(Child.ClickDetector)
