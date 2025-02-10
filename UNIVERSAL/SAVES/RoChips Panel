@@ -1,0 +1,120 @@
+if _G.RCLOADER then
+    return
+end
+_G.RCLOADER = true
+
+local loader = Instance.new("ScreenGui")
+local ImageLabel = Instance.new("ImageLabel")
+local Frame = Instance.new("Frame")
+local title = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
+local TextBox = Instance.new("TextBox")
+local ImageButton = Instance.new("ImageButton")
+
+-- Properties:
+
+loader.Name = "loader"
+loader.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+ImageLabel.Parent = loader
+ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel.BackgroundTransparency = 1.000
+ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel.BorderSizePixel = 0
+ImageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
+ImageLabel.Size = UDim2.new(0.772624433, 0, 0.831300795, 0)
+ImageLabel.Image = "rbxassetid://128362493965954"
+ImageLabel.ImageColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel.ImageTransparency = 0.700
+
+Frame.Parent = ImageLabel
+Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+Frame.BackgroundColor3 = Color3.fromRGB(158, 158, 158)
+Frame.BackgroundTransparency = 0.750
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+Frame.Size = UDim2.new(0.619326472, 0, 0.652811766, 0)
+
+title.Name = "title"
+title.Parent = Frame
+title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundTransparency = 0.800
+title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+title.BorderSizePixel = 0
+title.Position = UDim2.new(0.0118202958, 0, 0.0224719103, 0)
+title.Size = UDim2.new(0.976359427, 0, 0.131086141, 0)
+
+TextLabel.Parent = title
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0, 0, 0.171428576, 0)
+TextLabel.Size = UDim2.new(1.00968528, 0, 0.628571451, 0)
+TextLabel.Font = Enum.Font.FredokaOne
+TextLabel.Text = "welcome to rochips loader"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+TextLabel_2.Parent = Frame
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Position = UDim2.new(0.0354609601, 0, 0.176029965, 0)
+TextLabel_2.Size = UDim2.new(0.952718735, 0, 0.194756553, 0)
+TextLabel_2.Font = Enum.Font.FredokaOne
+TextLabel_2.Text =
+    'rochips panel was <b><font color="rgb(237,245,0)">created by @im_patrick</font></b> on youtube since justchips leave, if you got this rochips panel script from a hub or a website it\'s was not the original poster, copy code bellow if you got this rochip from a hub so you can direct execute it, sorry for this bad loader i have less effort to make it'
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextScaled = true
+TextLabel_2.RichText = true
+TextLabel_2.TextSize = 14.000
+TextLabel_2.TextWrapped = true
+
+TextBox.Parent = Frame
+TextBox.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+TextBox.BackgroundTransparency = 0.300
+TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.BorderSizePixel = 0
+TextBox.Position = UDim2.new(0.0118202958, 0, 0.404494375, 0)
+TextBox.Size = UDim2.new(0.976359427, 0, 0.370786518, 0)
+TextBox.ClearTextOnFocus = false
+TextBox.Font = Enum.Font.FredokaOne
+TextBox.MultiLine = true
+TextBox.PlaceholderColor3 = Color3.fromRGB(214, 207, 0)
+TextBox.Text =
+    'loadstring(game:HttpGet("https://raw.githubusercontent.com/randomstring0/new/refs/heads/main/notchip.json"))()'
+TextBox.TextColor3 = Color3.fromRGB(255, 255, 0)
+TextBox.TextSize = 14.000
+TextBox.TextXAlignment = Enum.TextXAlignment.Left
+TextBox.TextYAlignment = Enum.TextYAlignment.Top
+TextBox.TextWrapped = true
+
+ImageButton.Parent = Frame
+ImageButton.BackgroundColor3 = Color3.fromRGB(0, 255, 30)
+ImageButton.BackgroundTransparency = 0.400
+ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderSizePixel = 0
+ImageButton.Position = UDim2.new(0.0118202958, 0, 0.80898875, 0)
+ImageButton.Size = UDim2.new(0.976359427, 0, 0.164794013, 0)
+ImageButton.Image = "http://www.roblox.com/asset/?id=6026663699"
+ImageButton.ScaleType = Enum.ScaleType.Fit
+
+local lazy = true
+ImageButton.MouseButton1Down:Connect(
+    function()
+        if lazy then
+            lazy = false
+            loader:Destroy()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/randomstring0/new/refs/heads/main/notchip.json"))()
+        end
+    end
+)
+
+--unpack? wow
